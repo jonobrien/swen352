@@ -11,13 +11,12 @@ import java.io.Serializable;
 
 public class Card implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-
+    private static final long serialVersionUID = 1L;
     public final static String CAVALRY = "Cavalry";
     public final static String INFANTRY = "Infantry";
     public final static String CANNON = "Cannon";
     public final static String WILDCARD = "wildcard";
-
+    
     private String name;
     private Country country;
 

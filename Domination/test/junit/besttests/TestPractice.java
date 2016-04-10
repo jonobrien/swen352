@@ -5,17 +5,14 @@
  */
 package besttests;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import junit.framework.TestCase;
 
 /**
  *
  * @author Matthew
  */
-public class TestPractice {
-
-   @Test
-   public void testPrint() {
-      System.out.println("Running test 1");
-   }
+public class TestPractice extends TestCase{
+    public void testPrint() {
+	System.out.println("Running test 1");
+    }
 }

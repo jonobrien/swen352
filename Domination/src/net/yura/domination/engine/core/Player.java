@@ -68,6 +68,7 @@ public class Player implements Serializable {
 	Statistics = new Vector();
 	currentStatistic = new Statistic();
 	Statistics.add(currentStatistic);
+	System.out.println(address);
 
     }
 

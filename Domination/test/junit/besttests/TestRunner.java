@@ -16,7 +16,8 @@ public class TestRunner {
 	Result result = JUnitCore.runClasses(
 		TestPractice.class, 
 		TestPractice2.class,
-		TestMission.class
+		TestMission.class,
+		TestCard.class
 	);
 	for (Failure failure : result.getFailures()) {
 	    System.out.println("Failure: " + failure.toString());

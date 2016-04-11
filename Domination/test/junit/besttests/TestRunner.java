@@ -19,7 +19,7 @@ public class TestRunner {
 		TestMission.class
 	);
 	for (Failure failure : result.getFailures()) {
-	    System.out.println(failure.toString());
+	    System.out.println("Failure: " + failure.toString());
 	}
 	System.out.println(result.wasSuccessful());
     }

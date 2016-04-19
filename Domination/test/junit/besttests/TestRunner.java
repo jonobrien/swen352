@@ -16,7 +16,8 @@ public class TestRunner {
    public static void main(String[] args) {
        Result result = JUnitCore.runClasses(
 	       TestPractice.class, 
-	       TestPractice2.class
+	       TestPractice2.class,
+               TestContinent.class
        );
        for (Failure failure : result.getFailures()) {
 	   System.out.println(failure.toString());

@@ -97,7 +97,7 @@ public class Continent implements Serializable {
 	public void setArmyValue(int a) {
 		armyValue = a;
 	}
-
+ 
 	/**
 	 * Checks if the player owns all the territories within a continent
 	 * @param p player object

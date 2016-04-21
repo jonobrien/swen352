@@ -37,11 +37,38 @@ public class CardTest extends TestCase {
     }
 
     @Test
-    public void testGetName() {
+    public void testGetNameCav() {
         Continent testContinent = new Continent("continentString1", "continentString2",1234,4321);
         Country testCountry = new Country(1,"1","2",testContinent, 1,1);
         Card testCard = new Card("Cavalry", testCountry);
         assertEquals("Cavalry", testCard.getName());
+    }
+
+
+    @Test
+    public void testGetNameInf() {
+        Continent testContinent = new Continent("continentString1", "continentString2",1234,4321);
+        Country testCountry = new Country(1,"1","2",testContinent, 1,1);
+        Card testCard = new Card("Infantry", testCountry);
+        assertEquals("Infantry", testCard.getName());
+    }
+
+
+    @Test
+    public void testGetNameCan() {
+        Continent testContinent = new Continent("continentString1", "continentString2",1234,4321);
+        Country testCountry = new Country(1,"1","2",testContinent, 1,1);
+        Card testCard = new Card("Cannon", testCountry);
+        assertEquals("Cannon", testCard.getName());
+    }
+
+
+    @Test
+    public void testGetNameWild() {
+        Continent testContinent = new Continent("continentString1", "continentString2",1234,4321);
+        Country testCountry = new Country(1,"1","2",testContinent, 1,1);
+        Card testCard = new Card("Wildcard", testCountry);
+        assertEquals("Wildcard", testCard.getName());
     }
 
 
@@ -67,8 +94,8 @@ public class CardTest extends TestCase {
         Card testCard = new Card("Cavalry", testCountry);
         assertEquals(testCountry,testCard.getCountry());
     }
-
-
+    
+    
     @Test
     public void testSetContry() {
         Continent testContinent = new Continent("continentString1", "continentString2",1234,4321);
@@ -79,43 +106,27 @@ public class CardTest extends TestCase {
         assertEquals(testCountryTwo,testCard.getCountry());
     }
 
-
-    /**
-     * Test of getCountry method, of class Card.
-     */
-    public void testGetCountryOld() {
-        System.out.println("getCountry");
-        Card instance = null;
-        Country expResult = null;
-        Country result = instance.getCountry();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setCountry method, of class Card.
-     */
-    public void testSetCountry() {
-        System.out.println("setCountry");
-        Country a = null;
-        Card instance = null;
-        instance.setCountry(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of toString method, of class Card.
-     */
-    public void testToString() {
-        System.out.println("toString");
-        Card instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
+    @Test
+    public void testToString() {
+        Continent testContinent = new Continent("continentString1", "continentString2",1234,4321);
+        Country testCountry = new Country(1,"1","2",testContinent, 1,1);
+        Card testCard = new Card("Cavalry", testCountry);
+        System.out.println(testCard.toString());
+        System.out.println();
+        assertEquals("Cavalry", testCard.toString());
+    }
+
+
+    @Test
+    public void testToStringNullCountry() {
+        Continent testContinent = new Continent("continentString1", "continentString2",1234,4321);
+        Country testCountry = new Country(1,"1","2",testContinent, 1,1);
+        Card testCard = new Card("Cavalry", null);
+        System.out.println(testCard.toString());
+        System.out.println();
+        assertEquals("Cavalry", testCard.toString());
+    }
+
+
 }

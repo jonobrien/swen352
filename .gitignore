@@ -4,3 +4,6 @@
 /Domination/nbproject/private/private.xml
 /Domination/nbproject/private/config.properties
 Domination/.jococoverage/
+/Domination/jacoco.*
+/Dominaition/jacocoverage.*
+

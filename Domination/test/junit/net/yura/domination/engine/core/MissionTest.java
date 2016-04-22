@@ -5,214 +5,111 @@
  */
 package net.yura.domination.engine.core;
 
+import java.util.ArrayList;
 import junit.framework.TestCase;
 
 /**
  *
- * @author Jon_2
+ * @author Matthew
  */
+
 public class MissionTest extends TestCase {
+    ArrayList<Player> testplayers= new ArrayList<Player>();
+    Mission testmission;
     
-    public MissionTest(String testName) {
-        super(testName);
-    }
+    int color = 0xFF000000;
+    int noofarmies1 = 1;
+    int noofarmies2 = 2;
+    int noofcountries1 = 10;
+    int noofcountries2 = 20;
+    String description1 = "Mission1";
+    String description2 = "Mission2";
     
+    Continent c1 = new Continent("Id1", "Continent1" , color, 1);
+    Continent c2 = new Continent("Id2", "Continent2" , color, 1);
+    Continent c3 = new Continent("Id3", "Continent3" , color, 1);
+    Continent c4 = new Continent("Id4", "Continent4" , color, 1);
+
     @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    public void setUp(){
+	for (int i = 1; i <= 6; i+=1){
+	    Player p = new Player(1, ("Player" + i), color, "localhost");
+	    testplayers.add(p);
+	}
+	testmission = new Mission(testplayers.get(0), noofcountries1, noofarmies1, c1, c2, c3, description1);
+    }
+
+    public void printTest() {
+	System.out.println("Running TestMission");
     }
     
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    public void testGetContinent1(){
+	assertEquals(c1, testmission.getContinent1());
     }
-
-    /**
-     * Test of getPlayer method, of class Mission.
-     */
-    public void testGetPlayer() {
-        System.out.println("getPlayer");
-        Mission instance = null;
-        Player expResult = null;
-        Player result = instance.getPlayer();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    public void testGetContinent2(){
+	assertEquals(c2, testmission.getContinent2());
     }
-
-    /**
-     * Test of getNoofcountries method, of class Mission.
-     */
-    public void testGetNoofcountries() {
-        System.out.println("getNoofcountries");
-        Mission instance = null;
-        int expResult = 0;
-        int result = instance.getNoofcountries();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    public void testGetContinent3(){
+	assertEquals(c3, testmission.getContinent3());
     }
-
-    /**
-     * Test of getNoofarmies method, of class Mission.
-     */
-    public void testGetNoofarmies() {
-        System.out.println("getNoofarmies");
-        Mission instance = null;
-        int expResult = 0;
-        int result = instance.getNoofarmies();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    //note that it is misspelled as "getDiscription" in the source code
+    public void testGetDescription(){
+	assertEquals(testmission.getDiscription(), description1);
     }
-
-    /**
-     * Test of getContinent1 method, of class Mission.
-     */
-    public void testGetContinent1() {
-        System.out.println("getContinent1");
-        Mission instance = null;
-        Continent expResult = null;
-        Continent result = instance.getContinent1();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    public void testGetNoofarmies(){
+	assertEquals(noofarmies1, testmission.getNoofarmies());
     }
-
-    /**
-     * Test of getContinent2 method, of class Mission.
-     */
-    public void testGetContinent2() {
-        System.out.println("getContinent2");
-        Mission instance = null;
-        Continent expResult = null;
-        Continent result = instance.getContinent2();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    public void testGetNoocountries(){
+	assertEquals(noofcountries1, testmission.getNoofcountries());
     }
-
-    /**
-     * Test of getContinent3 method, of class Mission.
-     */
-    public void testGetContinent3() {
-        System.out.println("getContinent3");
-        Mission instance = null;
-        Continent expResult = null;
-        Continent result = instance.getContinent3();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    public void testGetPlayer(){
+	assertEquals(testplayers.get(0), testmission.getPlayer());
     }
-
-    /**
-     * Test of getDiscription method, of class Mission.
-     */
-    public void testGetDiscription() {
-        System.out.println("getDiscription");
-        Mission instance = null;
-        String expResult = "";
-        String result = instance.getDiscription();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    public void testSetContinent1(){
+	testmission.setContinent1(c4);
+	assertEquals(testmission.getContinent1(), c4);
     }
-
-    /**
-     * Test of toString method, of class Mission.
-     */
-    public void testToString() {
-        System.out.println("toString");
-        Mission instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    public void testSetContinent2(){
+	testmission.setContinent2(c4);
+	assertEquals(testmission.getContinent2(), c4);
     }
-
-    /**
-     * Test of setPlayer method, of class Mission.
-     */
-    public void testSetPlayer() {
-        System.out.println("setPlayer");
-        Player a = null;
-        Mission instance = null;
-        instance.setPlayer(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    public void testSetContinent3(){
+	testmission.setContinent3(c4);
+	assertEquals(testmission.getContinent3(), c4);
     }
-
-    /**
-     * Test of setNoofcountries method, of class Mission.
-     */
-    public void testSetNoofcountries() {
-        System.out.println("setNoofcountries");
-        int a = 0;
-        Mission instance = null;
-        instance.setNoofcountries(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    //note that it is misspelled as "setDiscription" in the source code
+    public void testSetDescription(){
+	testmission.setDiscription(description2);
+	assertEquals(testmission.getDiscription(), description2);
     }
-
-    /**
-     * Test of setNoofarmies method, of class Mission.
-     */
-    public void testSetNoofarmies() {
-        System.out.println("setNoofarmies");
-        int a = 0;
-        Mission instance = null;
-        instance.setNoofarmies(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    public void testSetNoOfArmies(){
+	testmission.setNoofarmies(noofarmies2);
+	assertEquals(testmission.getNoofarmies(), noofarmies2);
     }
-
-    /**
-     * Test of setContinent1 method, of class Mission.
-     */
-    public void testSetContinent1() {
-        System.out.println("setContinent1");
-        Continent a = null;
-        Mission instance = null;
-        instance.setContinent1(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    public void testSetNoOfCountries(){
+	testmission.setNoofcountries(noofcountries2);
+	assertEquals(testmission.getNoofcountries(), noofcountries2);
     }
-
-    /**
-     * Test of setContinent2 method, of class Mission.
-     */
-    public void testSetContinent2() {
-        System.out.println("setContinent2");
-        Continent a = null;
-        Mission instance = null;
-        instance.setContinent2(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    public void testSetPlayer(){
+	testmission.setPlayer(testplayers.get(1));
+	assertEquals(testmission.getPlayer(), testplayers.get(1));
     }
-
-    /**
-     * Test of setContinent3 method, of class Mission.
-     */
-    public void testSetContinent3() {
-        System.out.println("setContinent3");
-        Continent a = null;
-        Mission instance = null;
-        instance.setContinent3(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setDiscription method, of class Mission.
-     */
-    public void testSetDiscription() {
-        System.out.println("setDiscription");
-        String a = "";
-        Mission instance = null;
-        instance.setDiscription(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    public void testToString(){
+	assertEquals("Mission1", testmission.toString());
     }
     
 }

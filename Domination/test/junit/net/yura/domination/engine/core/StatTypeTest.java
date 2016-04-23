@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package net.yura.domination.engine.core;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -56,26 +57,18 @@ public class StatTypeTest extends TestCase {
      * Test of isSummable method, of class StatType.
      */
     public void testIsSummable() {
-        System.out.println("isSummable");
-        StatType instance = null;
-        boolean expResult = false;
-        boolean result = instance.isSummable();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("isSummable stattype");
+        StatType stat = StatType.COUNTRIES;
+        assertEquals(false, stat.isSummable());
     }
 
     /**
      * Test of getName method, of class StatType.
      */
     public void testGetName() {
-        System.out.println("getName");
-        StatType instance = null;
-        String expResult = "";
-        String result = instance.getName();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("getName stattype");
+        StatType stat = StatType.COUNTRIES;
+        assertEquals("countries", stat.getName());
     }
 
     /**

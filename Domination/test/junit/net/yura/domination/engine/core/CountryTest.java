@@ -5,9 +5,14 @@
  */
 package net.yura.domination.engine.core;
 
+import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Vector;
 import junit.framework.TestCase;
+import net.yura.domination.engine.RiskObjectOutputStream;
+import org.junit.Test;
+
+
 
 /**
  *
@@ -97,14 +102,46 @@ public class CountryTest extends TestCase {
     /**
      * Test of getCrossContinentNeighbours method, of class Country.
      */
-    public void testGetCrossContinentNeighbours() {
-        System.out.println("getCrossContinentNeighbours");
+    @Test
+    public void testGetCrossContinentNeighbours1() {
+        System.out.println("getCrossContinentNeighbours1");
         Country instance = new Country();
         List<Country> expResult = null;
         List<Country> result = instance.getCrossContinentNeighbours();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+    
+    @Test
+    public void testGetCrossContinentNeighbours2() {
+        System.out.println("\n\ngetCrossContinentNeighbours2");
+        Country instance = new Country();
+        List<Country> expResult = null;
+        List<Country> result = instance.getCrossContinentNeighbours();
+        assertEquals(expResult, result);
+
+        Continent testContinent = new Continent("continentString1", "continentString2",1234,4321);
+        Country testCountry = new Country(1,"1","2",testContinent, 1,1);
+        Country testCountry2 = new Country(2,"2","3",testContinent, 1,2);
+        testCountry.addNeighbour(testCountry2);
+        List<Country> results = null;
+        List<Country> win = testCountry.getCrossContinentNeighbours();
+        System.out.println(win);
+    }
+    
+    @Test
+    public void testWriteObject() {
+        Continent testContinent = new Continent("continentString1", "continentString2",1234,4321);
+        Country testCountry = new Country(1,"1","2",testContinent, 1,1);
+        //ObjectOutputStream outt = new RiskObjectOutputStream(OutputStream(null));
+    }
+    
+    @Test
+    public void testReadObject() {
+        Continent testContinent = new Continent("continentString1", "continentString2",1234,4321);
+        Country testCountry = new Country(1,"1","2",testContinent, 1,1);
+    
     }
 
     /**

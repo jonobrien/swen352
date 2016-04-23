@@ -40,7 +40,7 @@ public class MissionTest extends TestCase {
     }
 
     public void printTest() {
-	System.out.println("Running TestMission");
+	System.out.println("Running MissionTest");
     }
     
     public void testGetContinent1(){

@@ -7,6 +7,12 @@ package net.yura.domination.engine.core;
 
 import java.util.Vector;
 import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+import net.yura.domination.engine.core.Continent;
+import net.yura.domination.engine.core.Country;
+import net.yura.domination.engine.core.Player;
 
 /**
  *
@@ -14,12 +20,71 @@ import junit.framework.TestCase;
  */
 public class ContinentTest extends TestCase {
     
+    private Continent testContinent  = null;
+    private Continent testContinent2 = null;
+    
+    private Player    testPlayer    = null;
+    
+    private String    testid         = "qwerty";
+    private String    testName       = "test continent";
+    private int       testColor      = 123;
+    private int       testArmyValue  = 7;
+    
+    private Country   testCountryA  = null;
+    private Country   testCountryB  = null;
+    private Country   testCountryC  = null;
+    private Country   testCountryD  = null;
+    private Country   testCountryE  = null;
+    private Country   testCountryF  = null;
+    
     public ContinentTest(String testName) {
         super(testName);
     }
     
     @Override
     protected void setUp() throws Exception {
+        testContinent  = new Continent(testid, testName, testArmyValue, testColor);
+        testContinent2 = new Continent("udhaiofyr", "another test continent", 5, 456);
+        
+        testPlayer = new Player(0, "John Doe", 1, "0.0.0.0");
+        
+        testCountryA = new Country(testColor, "countryA", "countryA", testContinent, 2, 2);
+        testCountryB = new Country(testColor, "countryB", "countryB", testContinent, 2, 3);
+        testCountryC = new Country(testColor, "countryC", "countryC", testContinent, 1, 2);
+        testCountryD = new Country(testColor, "countryD", "countryD", testContinent2, 3, 2);
+        testCountryE = new Country(testColor, "countryE", "countryE", testContinent2, 3, 3);
+        testCountryF = new Country(testColor, "countryF", "countryF", testContinent2, 3, 4);
+        
+        testCountryA.addNeighbour(testCountryB);
+        testCountryA.addNeighbour(testCountryC);
+        testCountryA.addNeighbour(testCountryD);
+        
+        testCountryB.addNeighbour(testCountryA);
+        testCountryB.addNeighbour(testCountryE);
+        
+        testCountryC.addNeighbour(testCountryA);
+        
+        testCountryD.addNeighbour(testCountryA);
+        testCountryD.addNeighbour(testCountryE);
+        
+        testCountryE.addNeighbour(testCountryB);
+        testCountryE.addNeighbour(testCountryF);
+        testCountryE.addNeighbour(testCountryD);
+        
+        testCountryF.addNeighbour(testCountryE);
+        
+        testCountryA.setOwner(testPlayer);
+        testCountryB.setOwner(testPlayer);
+        testCountryC.setOwner(testPlayer);
+        
+        testContinent.addTerritoriesContained(testCountryA);
+        testContinent.addTerritoriesContained(testCountryB);
+        testContinent.addTerritoriesContained(testCountryC);
+        
+        testContinent2.addTerritoriesContained(testCountryD);
+        testContinent2.addTerritoriesContained(testCountryE);
+        testContinent2.addTerritoriesContained(testCountryF);
+        
         super.setUp();
     }
     
@@ -27,211 +92,116 @@ public class ContinentTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
     }
-
-    /**
-     * Test of toString method, of class Continent.
-     */
+    
+    @Test
     public void testToString() {
-        System.out.println("toString");
-        Continent instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expectedOutput = testid + " [" + testArmyValue + "]";
+        assertEquals(expectedOutput, testContinent.toString());
     }
-
-    /**
-     * Test of getIdString method, of class Continent.
-     */
+    
+    @Test
     public void testGetIdString() {
-        System.out.println("getIdString");
-        Continent instance = null;
-        String expResult = "";
-        String result = instance.getIdString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(testid, testContinent.getIdString());
     }
-
-    /**
-     * Test of setIdString method, of class Continent.
-     */
+    
+    @Test
     public void testSetIdString() {
-        System.out.println("setIdString");
-        String a = "";
-        Continent instance = null;
-        instance.setIdString(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        testid = "asdfjkl";
+        testContinent.setIdString(testid);
+        assertEquals(testid, testContinent.getIdString());
     }
-
-    /**
-     * Test of getName method, of class Continent.
-     */
+    
+    @Test
     public void testGetName() {
-        System.out.println("getName");
-        Continent instance = null;
-        String expResult = "";
-        String result = instance.getName();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(testName, testContinent.getName());
     }
-
-    /**
-     * Test of setName method, of class Continent.
-     */
+    
+    @Test
     public void testSetName() {
-        System.out.println("setName");
-        String a = "";
-        Continent instance = null;
-        instance.setName(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        testName = "new test name";
+        testContinent.setName(testName);
+        assertEquals(testName, testContinent.getName());
     }
-
-    /**
-     * Test of getColor method, of class Continent.
-     */
+    
+    @Test
     public void testGetColor() {
-        System.out.println("getColor");
-        Continent instance = null;
-        int expResult = 0;
-        int result = instance.getColor();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(testColor, testContinent.getColor());
     }
-
-    /**
-     * Test of setColor method, of class Continent.
-     */
+    
+    @Test
     public void testSetColor() {
-        System.out.println("setColor");
-        int a = 0;
-        Continent instance = null;
-        instance.setColor(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        testColor = 456;
+        testContinent.setColor(testColor);
+        assertEquals(testColor, testContinent.getColor());
     }
-
-    /**
-     * Test of getArmyValue method, of class Continent.
-     */
+    
+    @Test
     public void testGetArmyValue() {
-        System.out.println("getArmyValue");
-        Continent instance = null;
-        int expResult = 0;
-        int result = instance.getArmyValue();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(testArmyValue, testContinent.getArmyValue());
     }
-
-    /**
-     * Test of setArmyValue method, of class Continent.
-     */
+    
+    @Test
     public void testSetArmyValue() {
-        System.out.println("setArmyValue");
-        int a = 0;
-        Continent instance = null;
-        instance.setArmyValue(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        testArmyValue = 4;
+        testContinent.setArmyValue(testArmyValue);
+        assertEquals(testArmyValue, testContinent.getArmyValue());
     }
-
-    /**
-     * Test of isOwned method, of class Continent.
-     */
+    
+    @Test
     public void testIsOwned() {
-        System.out.println("isOwned");
-        Player p = null;
-        Continent instance = null;
-        boolean expResult = false;
-        boolean result = instance.isOwned(p);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        boolean owned  = testContinent.isOwned(testPlayer);
+        boolean owned2 = testContinent2.isOwned(testPlayer);
+        assertEquals(true, owned);
+        assertEquals(false, owned2);
     }
-
-    /**
-     * Test of getNumberOwned method, of class Continent.
-     */
+    
+    @Test
     public void testGetNumberOwned() {
-        System.out.println("getNumberOwned");
-        Player p = null;
-        Continent instance = null;
-        int expResult = 0;
-        int result = instance.getNumberOwned(p);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int numOwned  = testContinent.getNumberOwned(testPlayer);
+        int numOwned2 = testContinent2.getNumberOwned(testPlayer);
+        assertEquals(3, numOwned);
+        assertEquals(0, numOwned2);
     }
-
-    /**
-     * Test of getOwner method, of class Continent.
-     */
+    
+    @Test
     public void testGetOwner() {
-        System.out.println("getOwner");
-        Continent instance = null;
-        Player expResult = null;
-        Player result = instance.getOwner();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Player owner = testContinent.getOwner();
+        Player owner2 = testContinent2.getOwner();
+        assertEquals(testPlayer, owner);
+        assertEquals(null, owner2);
     }
-
-    /**
-     * Test of getBorderCountries method, of class Continent.
-     */
+    
+    @Test
     public void testGetBorderCountries() {
-        System.out.println("getBorderCountries");
-        Continent instance = null;
-        Vector expResult = null;
-        Vector result = instance.getBorderCountries();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Vector borderCountries = testContinent.getBorderCountries();
+        assertEquals(2, borderCountries.size());
+        assertEquals(testCountryA, borderCountries.get(0));
+        assertEquals(testCountryB, borderCountries.get(1));
     }
-
-    /**
-     * Test of getTerritoriesContained method, of class Continent.
-     */
+    
+    @Test
     public void testGetTerritoriesContained() {
-        System.out.println("getTerritoriesContained");
-        Continent instance = null;
-        Vector expResult = null;
-        Vector result = instance.getTerritoriesContained();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Vector territoriesContained = testContinent.getTerritoriesContained();
+        Vector testContained = new Vector();
+        testContained.add(testCountryA);
+        testContained.add(testCountryB);
+        testContained.add(testCountryC);
+        assertEquals(testContained, territoriesContained);
     }
-
-    /**
-     * Test of addTerritoriesContained method, of class Continent.
-     */
+    
+    @Test
     public void testAddTerritoriesContained() {
-        System.out.println("addTerritoriesContained");
-        Country t = null;
-        Continent instance = null;
-        instance.addTerritoriesContained(t);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Country testCountryG = new Country(testColor, "countryG", "countryG", testContinent2, 3, 5);
+        testCountryF.addNeighbour(testCountryG);
+        testCountryG.addNeighbour(testCountryF);
+        testContinent.addTerritoriesContained(testCountryG);
+        assertEquals(testCountryG, testContinent.getTerritoriesContained().get(3));
     }
-
-    /**
-     * Test of equals method, of class Continent.
-     */
+    
+    @Test
     public void testEquals() {
-        System.out.println("equals");
-        Object o = null;
-        Continent instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Continent testContinent3 = new Continent("udhaiofyr", "another test continent", 5, 456);
+        assertEquals(true, testContinent2.equals(testContinent3));
     }
     
 }

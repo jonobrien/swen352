@@ -3,6 +3,7 @@ package net.yura.domination.engine.core;
 import java.io.File;
 import junit.framework.TestCase;
 import net.yura.domination.engine.RiskUIUtil;
+import org.junit.Test;
 
 /**
  * @author Yur Mamyrin
@@ -350,6 +351,11 @@ public class RiskGameTest extends TestCase {
         
         
         
+        
+    }
+    
+    @Test
+    public void testLoadMap() {
         
     }
 

@@ -6,12 +6,17 @@
 package net.yura.domination.engine.core;
 
 import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 /**
  *
- * @author Jon_2
+ * @author Jim Craveiro
  */
 public class StatisticTest extends TestCase {
+    
+    
+    private Statistic testStatistic = null;
     
     public StatisticTest(String testName) {
         super(testName);
@@ -19,6 +24,8 @@ public class StatisticTest extends TestCase {
     
     @Override
     protected void setUp() throws Exception {
+        testStatistic = new Statistic();
+        
         super.setUp();
     }
     
@@ -27,135 +34,106 @@ public class StatisticTest extends TestCase {
         super.tearDown();
     }
 
-    /**
-     * Test of endGoStatistics method, of class Statistic.
-     */
+    @Test
     public void testEndGoStatistics() {
-        System.out.println("endGoStatistics");
-        int countries = 0;
-        int armies = 0;
-        int continents = 0;
-        int conectedEmpire = 0;
-        int cards = 0;
-        Statistic instance = new Statistic();
-        instance.endGoStatistics(countries, armies, continents, conectedEmpire, cards);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        testStatistic.endGoStatistics(1, 2, 3, 4, 5);
+        double countries = testStatistic.get(StatType.COUNTRIES);
+        double armies = testStatistic.get(StatType.ARMIES);
+        double continents = testStatistic.get(StatType.CONTINENTS);
+        double empire = testStatistic.get(StatType.CONNECTED_EMPIRE);
+        double cards = testStatistic.get(StatType.CARDS);
+        assertEquals(1, (int) countries);
+        assertEquals(2, (int) armies);
+        assertEquals(3, (int) continents);
+        assertEquals(4, (int) empire);
+        assertEquals(5, (int) cards);
     }
 
-    /**
-     * Test of addReinforcements method, of class Statistic.
-     */
+    @Test
     public void testAddReinforcements() {
-        System.out.println("addReinforcements");
-        int a = 0;
-        Statistic instance = new Statistic();
-        instance.addReinforcements(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        testStatistic.addReinforcements(12);
+        double reinforcements = testStatistic.get(StatType.REINFORCEMENTS);
+        assertEquals(12, (int) reinforcements);
     }
 
-    /**
-     * Test of addKill method, of class Statistic.
-     */
+    @Test
     public void testAddKill() {
-        System.out.println("addKill");
-        Statistic instance = new Statistic();
-        instance.addKill();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        testStatistic.addKill();
+        double kills = testStatistic.get(StatType.KILLS);
+        assertEquals(1, (int) kills);
     }
 
-    /**
-     * Test of addCasualty method, of class Statistic.
-     */
+    @Test
     public void testAddCasualty() {
-        System.out.println("addCasualty");
-        Statistic instance = new Statistic();
-        instance.addCasualty();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        for(int i = 0; i < 5; i++) {
+            testStatistic.addCasualty();
+        }
+        double casualties = testStatistic.get(StatType.CASUALTIES);
+        assertEquals(5, (int) casualties);
     }
 
-    /**
-     * Test of addAttack method, of class Statistic.
-     */
+    @Test
     public void testAddAttack() {
-        System.out.println("addAttack");
-        Statistic instance = new Statistic();
-        instance.addAttack();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        for(int i = 0; i < 3; i++) {
+            testStatistic.addAttack();
+        }
+        double attacks = testStatistic.get(StatType.ATTACKS);
+        assertEquals(3, (int) attacks);
     }
 
-    /**
-     * Test of addAttacked method, of class Statistic.
-     */
+    @Test
     public void testAddAttacked() {
-        System.out.println("addAttacked");
-        Statistic instance = new Statistic();
-        instance.addAttacked();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        for(int i = 0; i < 14; i++) {
+            testStatistic.addAttacked();
+        }
+        double attacked = testStatistic.get(StatType.ATTACKED);
+        assertEquals(14, (int) attacked);
     }
 
-    /**
-     * Test of addRetreat method, of class Statistic.
-     */
+    @Test
     public void testAddRetreat() {
-        System.out.println("addRetreat");
-        Statistic instance = new Statistic();
-        instance.addRetreat();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        for(int i = 0; i < 4; i++) {
+            testStatistic.addRetreat();
+        }
+        double retreats = testStatistic.get(StatType.RETREATS);
+        assertEquals(4, (int) retreats);
     }
 
-    /**
-     * Test of addCountriesWon method, of class Statistic.
-     */
+    @Test
     public void testAddCountriesWon() {
-        System.out.println("addCountriesWon");
-        Statistic instance = new Statistic();
-        instance.addCountriesWon();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        for(int i = 0; i < 9; i++) {
+            testStatistic.addCountriesWon();
+        }
+        double won = testStatistic.get(StatType.COUNTRIES_WON);
+        assertEquals(9, (int) won);
     }
 
-    /**
-     * Test of addCountriesLost method, of class Statistic.
-     */
+    @Test
     public void testAddCountriesLost() {
-        System.out.println("addCountriesLost");
-        Statistic instance = new Statistic();
-        instance.addCountriesLost();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        for(int i = 0; i < 6; i++) {
+            testStatistic.addCountriesLost();
+        }
+        double lost = testStatistic.get(StatType.COUNTRIES_LOST);
+        assertEquals(6, (int) lost);
     }
 
-    /**
-     * Test of addDice method, of class Statistic.
-     */
+    @Test
     public void testAddDice() {
-        System.out.println("addDice");
-        int diceValue = 0;
-        Statistic instance = new Statistic();
-        instance.addDice(diceValue);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        testStatistic.addDice(3);
+        double dice = testStatistic.get(StatType.DICE);
+        assertEquals(4, (int) dice); 
+        // 4 because dice go from 0-5 instead of 1-6
+        // meaning a 3 input would be 4 dice
     }
 
-    /**
-     * Test of get method, of class Statistic.
-     */
+    @Test
     public void testGet() {
-        System.out.println("get");
-        StatType statType = null;
-        Statistic instance = new Statistic();
-        double expResult = 0.0;
-        double result = instance.get(statType);
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        double oldCasualties = testStatistic.get(StatType.CASUALTIES);
+        for(int i = 0; i < 10; i++) {
+            testStatistic.addCasualty();
+        }
+        double newCasualties = testStatistic.get(StatType.CASUALTIES);
+        assertEquals(((int) oldCasualties) + 10, (int) newCasualties);
     }
     
 }

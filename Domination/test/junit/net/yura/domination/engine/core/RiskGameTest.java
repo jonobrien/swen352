@@ -1,6 +1,7 @@
 package net.yura.domination.engine.core;
 
 import java.io.File;
+import java.util.Vector;
 import junit.framework.TestCase;
 import net.yura.domination.engine.RiskUIUtil;
 import org.junit.Test;
@@ -10,11 +11,27 @@ import org.junit.Test;
  */
 public class RiskGameTest extends TestCase {
     
+        RiskGame instance;
+        Vector testVector;
+    
     public RiskGameTest(String testName) {
         super(testName);
     }
 
     protected void setUp() throws Exception {
+        try {
+            RiskUIUtil.mapsdir = new File("./game/Domination/maps").toURI().toURL();
+            instance = new RiskGame();
+        }
+        catch(Exception ex) {
+            throw new RuntimeException(ex);
+        }
+        
+        testVector = new Vector();
+        testVector.add("0");
+        testVector.add("1");
+        testVector.add("2");
+        
         super.setUp();
     }
 
@@ -27,15 +44,6 @@ public class RiskGameTest extends TestCase {
      */
     public void testTrade() {
         System.out.println("trade");
-
-        RiskGame instance;
-        try {
-            RiskUIUtil.mapsdir = new File("./game/Domination/maps").toURI().toURL();
-            instance = new RiskGame();
-        }
-        catch(Exception ex) {
-            throw new RuntimeException(ex);
-        }
 
         //Country country =  new Country(1, "name", "Full Name", new Continent("name", "Full Name", 5, 0xFFFF0000), 10, 10);
 
@@ -354,9 +362,132 @@ public class RiskGameTest extends TestCase {
         
     }
     
-    @Test
-    public void testLoadMap() {
-        
+    private void print(String str) {
+        System.out.println(str);
     }
 
+    @Test
+    public void testAddCommand() {
+        print("addCommand");
+        instance.addCommand("beep boop");
+        assertEquals("beep boop", instance.getCommands().get(0));
+    }
+    
+    @Test
+    public void testGetCommands() {
+        print("getCommands");
+        instance.addCommand("0");
+        instance.addCommand("1");
+        instance.addCommand("2");
+        
+        assertEquals(testVector, instance.getCommands());
+    }
+    
+    @Test
+    public void testSetCommands() {
+        print("setCommands");
+        
+        instance.setCommands(testVector);
+        assertEquals(testVector, instance.getCommands());
+    }
+    
+    @Test
+    public void testGetMaxDefendDice() throws Exception {
+        print("getMaxDefendDice");
+        instance.startGame(0, 0, true, true);
+        assertEquals(3, instance.getMaxDefendDice());
+    }
+    
+    @Test
+    public void testAddPlayer() {
+        print("addPlayer");
+        boolean added = instance.addPlayer(0, "beep", 123, "boop");
+        boolean added2 = instance.addPlayer(0, "beep", 123, "boop");
+        boolean removed = instance.delPlayer("beep");
+        assertEquals(true, added);
+        assertEquals(false, added2);
+        assertEquals(true, removed);
+    }
+    
+    @Test
+    public void testDelPlayer() {
+        print("delPlayer");
+        instance.addPlayer(0, "remove me", 123, "boop");
+        boolean removed = instance.delPlayer("remove me");
+        boolean removed2 = instance.delPlayer("remove me");
+        assertEquals(true, removed);
+        assertEquals(false, removed2);
+    }
+    
+    @Test
+    public void testSetCurrentPlayer() {
+        print("setCurrentPlayer");
+        instance.addPlayer(0, "p1", 123, "boop");
+        instance.addPlayer(0, "p2", 456, "beep");
+        Player curPlayer = instance.setCurrentPlayer(0);
+        assertEquals("boop", curPlayer.getAddress());
+        assertEquals(123, curPlayer.getColor());
+        assertEquals("p1", curPlayer.getName());
+    }
+    
+    @Test
+    public void testGetRandomPlayer() {
+        print("getRandomPlayer");
+        instance.addPlayer(0, "p1", 123, "boop");
+        assertEquals(0, instance.getRandomPlayer());
+    }
+    
+    @Test
+    public void testGetDesrvedCard() throws Exception {
+        print("getDesrvedCard");
+        instance.startGame(0, 0, true, true);
+        assertEquals("", instance.getDesrvedCard());
+    }
+    
+    @Test
+    public void testIsCapturedCountry() throws Exception {
+        print("isCapturedCountry");
+        instance.startGame(0, 0, true, true);
+        assertEquals(false, instance.isCapturedCountry());
+    }
+    
+    @Test
+    public void testCanTrade() throws Exception {
+        print("canTrade");
+        instance.addPlayer(0, "p1", 123, "boop");
+        instance.setCurrentPlayer(0);
+        instance.startGame(0, 0, true, true);
+        assertEquals(false, instance.canTrade());
+    }
+    
+    @Test
+    public void testGetNewCardState() {
+        print("getNewCardState()");
+        assertEquals(4, instance.getNewCardState());
+    }
+    
+    @Test
+    public void testEndTrade() {
+        print("endTrade");
+        assertEquals(false, instance.endTrade());
+    }
+    
+    @Test
+    public void testCanEndTrade() {
+        print("canEndTrade");
+        assertEquals(false, instance.canEndTrade());
+    }
+    
+    @Test
+    public void testAttack() {
+        print("attack");
+        assertEquals(false, instance.attack(new Country(), new Country()));
+    }
+    
+    @Test
+    public void testEndAttack() {
+        print("endAttack");
+        assertEquals(false, instance.endAttack());
+    }
+    
 }
